@@ -1,0 +1,4 @@
+#!/bin/bash
+# This script shows the TCP and UDP ports on which the server is listening.
+
+netstat -pl
