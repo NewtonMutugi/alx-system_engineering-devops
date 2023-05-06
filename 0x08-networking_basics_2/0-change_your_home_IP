@@ -5,9 +5,6 @@
 # 2. facebook.com resolves to 8.8.8.8
 # 3. The checker is running on Docker container named checker
 
-# update /etc/hosts file to map localhost to 127.0.0.2
-sudo sed -i 's/127.0.0.1/127.0.0.2/g' /etc/hosts
-
-# update DNS server for facebook.com to 8.8.8.8
-sudo sed -i 's/nameserver.*/nameserver 8.8.8.8/g' /etc/resolv.conf
-
+cp /etc/hosts ~/hosts.new
+sed -i 's/127.*$/127.0.0.2 localhost\n8.8.8.8 facebook.com/' ~/hosts.new
+sudo cp -f ~/hosts.new /etc/hosts
