@@ -6,8 +6,7 @@
 #
 # You must use the while loop (for and until are forbidden)
 
-while IFS=: read -r username password gid info home shell
+while IFS=: read -r user pass gid info home shell
 do
-    echo "The user $username is part of the $gid gang, lives in $home and rides $shell. User ID's place is protected by the passcode $password, more info about the usr here: $info"
-
+	echo "The user $user is part of the $gid gang, lives in $home and rides $shell. User ID's place is protected by the passcode $pass, more info about the usr here: $info"
 done < /etc/passwd
