@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # This script manages the manage_my_process Bash script.
 # It can be used to start, stop, or restart the process.
 
