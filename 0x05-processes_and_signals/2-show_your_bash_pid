@@ -8,4 +8,4 @@
 # Show the command line
 # Sort by PID
 
-ps -auxf | awk '{print $2, $11}' | sort -n
+ps -auxf | grep bash
