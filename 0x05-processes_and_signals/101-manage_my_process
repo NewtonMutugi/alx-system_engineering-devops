@@ -14,7 +14,7 @@ fi
 # Check if the process is already running.
 if [[ -f /var/run/my_process.pid ]]; then
   pid=$(cat /var/run/my_process.pid)
-  if [[ $(ps -p $pid -o stat=) == "T" ]]; then
+  if [[ $(ps -p "$pid" -o stat=) == "T" ]]; then
     # The process is already running.
     if [[ $action == "start" ]]; then
       echo "The process is already running."
@@ -33,11 +33,11 @@ if [[ $action == "start" ]]; then
   echo "manage_my_process started"
   echo $! > /var/run/my_process.pid
 elif [[ $action == "stop" ]]; then
-  kill $(cat /var/run/my_process.pid)
+  kill "$(cat /var/run/my_process.pid)"
   echo "manage_my_process stopped"
   rm /var/run/my_process.pid
 elif [[ $action == "restart" ]]; then
-  kill $(cat /var/run/my_process.pid)
+  kill "$(cat /var/run/my_process.pid)"
   echo "manage_my_process stopped"
   rm /var/run/my_process.pid
   nohup ./manage_my_process &
