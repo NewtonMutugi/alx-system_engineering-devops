@@ -8,6 +8,5 @@
 
 # Starting my script
 
-./4-to_infinity_and_beyond &
-echo $! > 4-to_infinity_and_beyond.pid
+pkill -f 4-to_infinity_and_beyond
 
