@@ -6,19 +6,21 @@
 sudo apt-get update
 sudo apt-get -y install nginx
 
+# Create folders
 mkdir /etc/nginx/html
-mkdir /etc/nginx/html/test
-touch /etc/nginx/html/test/index.html
-echo "Hello World!" | sudo tee /etc/nginx/html/test/index.html > /dev/null
+# Create file
+touch /etc/nginx/html/index.html
 
+# Write to files
+echo "Hello World!" > /etc/nginx/html/index.html
+printf %s "server {
+	listen    80 default_server;
+	listen    [::]:80 default_server;
+	root      /etc/nginx/html;
+	index     index.html index.htm;
+}
+" > /etc/nginx/sites-available/default
 
-# Configure Nginx
-sudo echo "server {
-    listen 80;
-    location / {
-        echo 'Hello World!';
-    }
-}" | sudo tee /etc/nginx/sites-available/default > /dev/null
 
 # Restart Nginx
 sudo service nginx restart
