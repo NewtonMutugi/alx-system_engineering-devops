@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Bash script that configures a new Ubuntu machine to respect above requirements
+# (this script will be run on the server itself)
+
+# Install nginx
+sudo apt-get update
+sudo apt-get -y install nginx
+
+# Configure Nginx
+sudo echo "server {
+    listen 80;
+    location / {
+        echo 'Hello World!';
+    }
+}" | sudo tee /etc/nginx/sites-available/default > /dev/null
+
+# Restart Nginx
+sudo service nginx restart
