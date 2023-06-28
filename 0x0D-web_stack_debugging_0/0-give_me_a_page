@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script will install apache2 and create a index.html file
+echo 'Hello Holberton' > /var/www/html/index.html
+sudo service apache2 start
