@@ -5,15 +5,15 @@
 sudo apt-get update
 sudo apt-get install -y nginx
 
-# code to redirect a specific endpoint
-echo "Hello World!" | sudo tee /var/www/html/index.html
-string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.blog.ehoneahobed.com permanent;"
-sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+# Create files
+sudo mkdir /etc/nginx/html
+sudo touch /etc/nginx/html/index.html
+sudo echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo touch /etc/nginx/html/404.html
+sudo echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
-# code to create error page and add a redirect for error 404
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-string_for_replacement="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-sudo sed -i "s/listen 80 default_server;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+str="\\\terror_page 404 /404.html;\n\tlocation /404 {\n\t\troot /etc/nginx/html;\n\t\t\internal;\n\t}"
+sudo sed -i "9i $str" /etc/nginx/sites-available/default
 
 # restart the server
 sudo service nginx restart
