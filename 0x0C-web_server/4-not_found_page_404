@@ -12,8 +12,22 @@ sudo echo "Hello World!" | sudo tee /var/www/html/index.html
 sudo touch /etc/nginx/html/404.html
 sudo echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
-str="\\\terror_page 404 /404.html;\n\tlocation /404 {\n\t\troot /etc/nginx/html;\n\t\t\internal;\n\t}"
-sudo sed -i "9i $str" /etc/nginx/sites-available/default
+# str="\\\terror_page 404 /404.html;\n\tlocation /404 {\n\t\troot /etc/nginx/html;\n\t\tinternal;\n\t}\n"
+# sudo sed -i "9i $str" /etc/nginx/sites-available/default
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /etc/nginx/html;
+    index  index.html index.htm;
+    location /redirect_me {
+        return 301 http://youtube.com/UCw4X_zayaSiuVYcqWpiaSWw;
+    }
+    error_page 404 /404.html;
+    location /404 {
+    	root /etc/nginx/html;
+	internal;
+    }
+}" > /etc/nginx/sites-available/default
 
 # restart the server
 sudo service nginx restart
