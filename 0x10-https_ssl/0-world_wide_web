@@ -1,33 +1,20 @@
 #!/usr/bin/env bash
 # script that outputs the subdomain, Record-type and Destination
 
-get_record_info() {
-  domain="$1"
-  subdomain="$2"
-  record_info=$(dig +short "$subdomain.$domain" | awk '{ print $1 }')
-
-  if [ -z "$record_info" ]; then
-    echo "No record found for subdomain $subdomain"
-  else
-    record_type=$(dig +short "$subdomain.$domain" | awk '{ print $4 }')
-    echo "The subdomain $subdomain is a $record_type record and points to $record_info"
-  fi
+get_record ()
+{
+    printf "The subdomain %s is a " "$2"
+    dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $4 }'
+    printf " record and points to "
+    dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $5 }'
+    echo ""
 }
 
-domain="$1"
-subdomain="$2"
-
-if [ -z "$domain" ]; then
-  echo "Domain parameter is missing."
-  exit 1
-fi
-
-if [ -z "$subdomain" ]; then
-  subdomains=("www" "lb-01" "web-01" "web-02")
+if [ -z "$2" ]; then
+   for subs in "www" "lb-01" "web-01" "web-02"
+   do
+       get_record "$1" "$subs"
+   done
 else
-  subdomains=("$subdomain")
+    get_record "$1" "$2"
 fi
-
-for sub in "${subdomains[@]}"; do
-  get_record_info "$domain" "$sub"
-done
