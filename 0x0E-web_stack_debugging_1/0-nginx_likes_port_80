@@ -2,7 +2,7 @@
 # Conscript that configures a server to the above requirements
 
 # Update Nginx configuration to listen on port 80
-sudo sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # Restart Nginx
 sudo service nginx restart
