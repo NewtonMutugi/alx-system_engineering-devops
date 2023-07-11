@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 # Conscript that configures a server to the above requirements
 
-rm /etc/nginx/sites-enabled/default
-
 # Update Nginx configuration to listen on port 80
-sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+sudo sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
 
 # Restart Nginx
 sudo service nginx restart
