@@ -35,3 +35,5 @@
 * Your Bash script must pass `Shellcheck` (version `0.3.7-5~ubuntu16.04.1` via `apt-get`) without any error
 * The first line of all your Bash scripts should be exactly `#!/usr/bin/env bash`
 * The second line of all your Bash scripts should be a comment explaining what is the script doing
+
+# Newtonmutugi2002#
