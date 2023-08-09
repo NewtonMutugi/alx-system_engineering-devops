@@ -1,12 +1,9 @@
-# 0-strace_is_your_friend.pp
+# This is a sample manifest to show how to use strace to debug a problem
 
-# Fix the issue using an Exec resource
 exec { 'fix-apache-issue':
-  command     => '/path/to/fix_script.sh', # Replace with the actual fix command or script
+  command     => '/path/to/fix_script.sh',
   refreshonly => true,
 }
-
-# Restart Apache service after fixing
 service { 'apache2':
   ensure => 'running',
   enable => true,
