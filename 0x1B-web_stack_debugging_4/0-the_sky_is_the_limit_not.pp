@@ -12,4 +12,4 @@ service { 'nginx':
   enable  => true,
   require => Exec['fix--for-nginx']
 }
-```
+
