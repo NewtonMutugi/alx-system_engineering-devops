@@ -7,9 +7,8 @@ exec { 'fix--for-nginx':
 } ->
 
 # Restart the nginx service
-service { 'nginx':
-  ensure  => running,
-  enable  => true,
-  require => Exec['fix--for-nginx']
+exec { 'nginx-restart':
+  command => 'nginx restart',
+  path    => '/etc/init.d/'
 }
 
