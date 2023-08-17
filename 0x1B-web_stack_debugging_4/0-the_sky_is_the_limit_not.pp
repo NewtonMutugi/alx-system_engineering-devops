@@ -1,4 +1,4 @@
-# Puppet increases the limit of request in the nginx server
+# Increases the limit of request in the nginx server
 
 # Increase the ULIMIT
 exec { 'fix--for-nginx':
